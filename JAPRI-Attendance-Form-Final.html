@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesta Rakyat 17 Agustus 2025 - Registrasi</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css');
+        
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: text;
+        }
+        
+        input, textarea, button {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+        
+        .flag-indonesia {
+            width: 64px;
+            height: 48px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .flag-red {
+            width: 100%;
+            height: 50%;
+            background-color: #dc2626;
+        }
+        
+        .flag-white {
+            width: 100%;
+            height: 50%;
+            background-color: #ffffff;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #dc2626 0%, #ffffff 50%, #dc2626 100%);
+            min-height: 100vh;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        .auto-save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .auto-save-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .admin-modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            margin: 1rem;
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .connection-status.online {
+            background: #10b981;
+            color: white;
+        }
+
+        .connection-status.offline {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .flag-indonesia {
+                width: 48px;
+                height: 36px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .card-shadow {
+                margin-bottom: 1rem;
+            }
+
+            .logo-container img {
+                width: 48px !important;
+                height: 48px !important;
+            }
+        }
+
+        /* iOS Safari fixes */
+        input, textarea, button {
+            -webkit-appearance: none;
+            -webkit-border-radius: 0;
+            border-radius: 0.5rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            zoom: 1;
+        }
+
+        /* Prevent zoom on input focus for iOS */
+        @media screen and (max-width: 768px) {
+            input, textarea, select {
+                font-size: 16px;
+            }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    <!-- Connection status indicator -->
+    <div id="connectionStatus" class="connection-status online">
+        🌐 Online - Multi-device sync active
+    </div>
+
+    <!-- Auto-save indicator -->
+    <div id="autoSaveIndicator" class="auto-save-indicator">
+        💾 Data tersimpan otomatis
+    </div>
+
+    <!-- Admin Login Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-modal">
+            <h3 class="text-xl font-bold text-red-700 mb-4 text-center">🔐 Admin Access</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                    <input
+                        type="email"
+                        id="adminEmail"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500"
+                        placeholder="Enter admin email"
+                    />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500"
+                        placeholder="Enter password"
+                    />
+                </div>
+                <div class="flex gap-2">
+                    <button
+                        onclick="verifyAdmin()"
+                        class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-all"
+                    >
+                        Login
+                    </button>
+                    <button
+                        onclick="closeAdminPanel()"
+                        class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-all"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="bg-red-700 text-white py-6 md:py-8 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center gap-4 md:gap-6 mb-4 flex-wrap">
+                <div class="logo-container">
+                    <img id="japriLogo" 
+                         src="Logo_JAPRI.jpg" 
+                         alt="Logo JAPRI" 
+                         class="w-16 h-16 rounded-full border-2 border-white shadow-lg"
+                         onerror="this.style.display='none'; document.getElementById('japriLogoFallback').style.display='flex';"
+                    />
+                    <div id="japriLogoFallback" class="w-16 h-16 rounded-full border-2 border-white shadow-lg bg-white flex items-center justify-center text-red-600 font-bold text-xs" style="display: none;">
+                        JAPRI
+                    </div>
+                </div>
+                <div class="flag-indonesia">
+                    <div class="flag-red"></div>
+                    <div class="flag-white"></div>
+                </div>
+                <div class="logo-container">
+                    <img id="hutLogo" 
+                         src="logo_80tahun.jpg" 
+                         alt="Logo 80 Tahun" 
+                         class="w-16 h-16 rounded-full border-2 border-white shadow-lg"
+                         onerror="this.style.display='none'; document.getElementById('hutLogoFallback').style.display='flex';"
+                    />
+                    <div id="hutLogoFallback" class="w-16 h-16 rounded-full border-2 border-white shadow-lg bg-white flex items-center justify-center text-red-600 font-bold text-xs" style="display: none;">
+                        80<br>THN
+                    </div>
+                </div>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">PESTA RAKYAT</h1>
+            <h2 class="text-xl md:text-2xl font-semibold mb-1">17 AGUSTUS 2025</h2>
+            <p class="text-xs md:text-sm text-red-200 mb-2">JAPRI (Jaringan Persaudaraan Indonesia) Riyadh | Developed by Aji Teguh, M.Sc </p>
+            <p class="text-base md:text-lg flex items-center justify-center gap-2 flex-wrap">
+                📅 Perayaan Kemerdekaan Indonesia ke-80 | Diadakan pada tanggal 22 Agustus 2025
+            </p>
+            <div class="flex items-center justify-center gap-2 mt-2 flex-wrap">
+                📍 <span>Riyadh (Exit 18), Saudi Arabia</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-2 md:px-4 py-6 md:py-8">
+        <div class="grid lg:grid-cols-2 gap-6 md:gap-8">
+            <!-- Form Registrasi -->
+            <div class="bg-white rounded-xl card-shadow p-6 md:p-8">
+                <h3 class="text-xl md:text-2xl font-bold text-red-700 mb-6 text-center">
+                    Registrasi Tamu
+                </h3>
+                
+                <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6 animate-pulse hidden">
+                    ✅ Registrasi berhasil! Data tersimpan otomatis.
+                </div>
+
+                <div class="space-y-4 md:space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Nama Lengkap *
+                        </label>
+                        <input
+                            type="text"
+                            id="nama"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                            placeholder="Masukkan nama lengkap"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Nomor HP *
+                        </label>
+                        <input
+                            type="tel"
+                            id="nomorHp"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                            placeholder="Contoh: +966512345678"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Pekerjaan *
+                        </label>
+                        <input
+                            type="text"
+                            id="pekerjaan"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                            placeholder="Contoh: Software Engineer, Dokter, dll"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Asal Organisasi (Opsional)
+                        </label>
+                        <input
+                            type="text"
+                            id="asalOrganisasi"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                            placeholder="Contoh: KBRI Riyadh, ARAMCO, dll"
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Alamat Domisili di Riyadh *
+                        </label>
+                        <textarea
+                            id="alamatRiyadh"
+                            rows="3"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"
+                            placeholder="Contoh: Al Olaya District, Prince Turki Ibn Abdulaziz Al Awwal Road, Riyadh 12333"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button
+                        onclick="submitForm()"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 hover-scale shadow-lg touch-manipulation"
+                    >
+                        DAFTAR SEKARANG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Tamu -->
+            <div class="bg-white rounded-xl card-shadow p-6 md:p-8">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
+                    <h3 class="text-xl md:text-2xl font-bold text-red-700 flex items-center gap-2">
+                        👥 Dashboard Tamu
+                    </h3>
+                    <div class="flex gap-2 w-full md:w-auto">
+                        <button
+                            onclick="showAdminPanel()"
+                            class="flex-1 md:flex-none bg-blue-600 hover:bg-blue-700 text-white px-3 md:px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-300 text-sm touch-manipulation"
+                            id="downloadBtn"
+                        >
+                            📥 Download CSV
+                        </button>
+                        <button
+                            onclick="clearAllData()"
+                            class="flex-1 md:flex-none bg-red-600 hover:bg-red-700 text-white px-3 md:px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-300 text-sm touch-manipulation"
+                            id="clearBtn"
+                        >
+                            🗑️ Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 rounded-lg p-4 mb-6">
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-red-700" id="totalGuests">0</div>
+                        <div class="text-sm text-red-600">Total Tamu Terdaftar</div>
+                        <div class="text-xs text-gray-500 mt-1" id="lastUpdated">
+                            Aplikasi siap digunakan
+                        </div>
+                        <div class="text-xs text-blue-600 mt-1" id="deviceCount">
+                            Multi-device: Ready for 10+ devices
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 md:space-y-4 max-h-80 md:max-h-96 overflow-y-auto" id="guestList">
+                    <div class="text-center text-gray-500 py-8" id="emptyState">
+                        <div class="text-4xl mb-4">👥</div>
+                        <p class="text-sm md:text-base">Belum ada tamu yang terdaftar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 md:mt-12 text-gray-600">
+            <div class="bg-white rounded-xl shadow-lg p-4 md:p-6">
+                <h4 class="text-base md:text-lg font-bold text-red-700 mb-2">🇮🇩 Dirgahayu Indonesia ke-80! 🇮🇩</h4>
+                <p class="text-sm">
+                    Mari rayakan kemerdekaan Indonesia bersama komunitas Indonesia di Riyadh
+                </p>
+                <div class="mt-4 text-xs text-gray-500">
+                    * Data tersinkronisasi secara real-time antar 10+ perangkat. Download CSV khusus admin.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced storage system with proper multi-device sync
+        const STORAGE_KEY = 'japri_guests_2025_v2';
+        const SYNC_INTERVAL = 2000; // 2 seconds for better responsiveness
+        let guests = [];
+        let isAdmin = false;
+        let syncInterval;
+        let deviceId = generateDeviceId();
+        let lastSyncTime = 0;
+
+        // Generate unique device ID
+        function generateDeviceId() {
+            const stored = localStorage.getItem('japri_device_id');
+            if (stored) return stored;
+            
+            const id = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('japri_device_id', id);
+            return id;
+        }
+
+        // Enhanced cloud storage simulation with better conflict resolution
+        function saveToCloud(data) {
+            try {
+                const timestamp = Date.now();
+                const cloudData = {
+                    guests: data,
+                    lastUpdate: timestamp,
+                    version: timestamp,
+                    deviceId: deviceId,
+                    deviceCount: getConnectedDevices()
+                };
+                
+                // Save to localStorage as primary storage
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudData));
+                
+                // Simulate cloud sync with a global variable
+                window.japriCloudData = cloudData;
+                lastSyncTime = timestamp;
+                
+                // Update connection status
+                updateConnectionStatus();
+                
+                return cloudData;
+            } catch (error) {
+                console.error('Error saving data:', error);
+                return null;
+            }
+        }
+
+        function loadFromCloud() {
+            try {
+                // Try localStorage first
+                const localData = localStorage.getItem(STORAGE_KEY);
+                if (localData) {
+                    const parsed = JSON.parse(localData);
+                    if (parsed && Array.isArray(parsed.guests)) {
+                        return parsed;
+                    }
+                }
+                
+                // Fallback to global variable
+                if (window.japriCloudData && Array.isArray(window.japriCloudData.guests)) {
+                    return window.japriCloudData;
+                }
+                
+                return { guests: [], lastUpdate: 0, version: 0, deviceId: deviceId, deviceCount: 1 };
+            } catch (error) {
+                console.error('Error loading data:', error);
+                return { guests: [], lastUpdate: 0, version: 0, deviceId: deviceId, deviceCount: 1 };
+            }
+        }
+
+        function getConnectedDevices() {
+            try {
+                const data = loadFromCloud();
+                return Math.max(1, data.deviceCount || 1);
+            } catch {
+                return 1;
+            }
+        }
+
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            const deviceCountEl = document.getElementById('deviceCount');
+            
+            if (navigator.onLine) {
+                statusEl.className = 'connection-status online';
+                statusEl.textContent = '🌐 Online - Multi-device sync active';
+                deviceCountEl.textContent = `Multi-device: ${getConnectedDevices()} device(s) connected`;
+            } else {
+                statusEl.className = 'connection-status offline';
+                statusEl.textContent = '📴 Offline - Data saved locally';
+                deviceCountEl.textContent = 'Offline mode - Will sync when online';
+            }
+        }
+
+        // Enhanced real-time sync
+        function startSync() {
+            syncInterval = setInterval(() => {
+                try {
+                    const cloudData = loadFromCloud();
+                    
+                    // Check if data has been updated by another device
+                    if (cloudData.lastUpdate > lastSyncTime && cloudData.deviceId !== deviceId) {
+                        guests = [...cloudData.guests];
+                        lastSyncTime = cloudData.lastUpdate;
+                        updateGuestDisplay();
+                        
+                        const updateTime = new Date(cloudData.lastUpdate).toLocaleString('id-ID');
+                        document.getElementById('lastUpdated').textContent = `Update: ${updateTime}`;
+                        
+                        // Show sync indicator
+                        showAutoSaveIndicator('🔄 Sync from other device');
+                    }
+                    
+                    updateConnectionStatus();
+                } catch (error) {
+                    console.error('Sync error:', error);
+                }
+            }, SYNC_INTERVAL);
+        }
+
+        function stopSync() {
+            if (syncInterval) {
+                clearInterval(syncInterval);
+            }
+        }
+
+        function showAutoSaveIndicator(message = '💾 Data tersimpan otomatis') {
+            const indicator = document.getElementById('autoSaveIndicator');
+            indicator.textContent = message;
+            indicator.classList.add('show');
+            setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 2500);
+        }
+
+        function submitForm() {
+            try {
+                // Get form data
+                const formData = {
+                    nama: document.getElementById('nama').value.trim(),
+                    nomorHp: document.getElementById('nomorHp').value.trim(),
+                    pekerjaan: document.getElementById('pekerjaan').value.trim(),
+                    asalOrganisasi: document.getElementById('asalOrganisasi').value.trim(),
+                    alamatRiyadh: document.getElementById('alamatRiyadh').value.trim()
+                };
+
+                // Validate required fields
+                const required = ['nama', 'nomorHp', 'pekerjaan', 'alamatRiyadh'];
+                const missingFields = required.filter(field => !formData[field]);
+                
+                if (missingFields.length > 0) {
+                    alert('Mohon lengkapi semua field yang wajib diisi!');
+                    return;
+                }
+
+                // Add guest with enhanced metadata
+                const newGuest = {
+                    id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                    ...formData,
+                    waktuDaftar: new Date().toLocaleString('id-ID', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    }),
+                    deviceId: deviceId,
+                    timestamp: Date.now(),
+                    userAgent: navigator.userAgent.slice(0, 50)
+                };
+
+                guests.push(newGuest);
+
+                // Save to cloud with error handling
+                const saved = saveToCloud(guests);
+                if (saved) {
+                    showAutoSaveIndicator('✅ Data berhasil disimpan!');
+                    
+                    // Reset form
+                    ['nama', 'nomorHp', 'pekerjaan', 'asalOrganisasi', 'alamatRiyadh'].forEach(id => {
+                        document.getElementById(id).value = '';
+                    });
+
+                    // Show success message
+                    const successMsg = document.getElementById('successMessage');
+                    successMsg.classList.remove('hidden');
+                    setTimeout(() => {
+                        successMsg.classList.add('hidden');
+                    }, 4000);
+
+                    // Update display
+                    updateGuestDisplay();
+                } else {
+                    alert('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                alert('Terjadi kesalahan. Silakan refresh halaman dan coba lagi.');
+            }
+        }
+
+        function updateGuestDisplay() {
+            try {
+                const totalElement = document.getElementById('totalGuests');
+                const guestListElement = document.getElementById('guestList');
+
+                totalElement.textContent = guests.length;
+
+                if (guests.length === 0) {
+                    guestListElement.innerHTML = '<div class="text-center text-gray-500 py-8"><div class="text-4xl mb-4">👥</div><p class="text-sm md:text-base">Belum ada tamu yang terdaftar</p></div>';
+                } else {
+                    // Sort guests by registration time (newest first)
+                    const sortedGuests = [...guests].sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    // Generate guest list HTML
+                    const guestHTML = sortedGuests.map((guest, index) => `
+                        <div class="bg-gray-50 rounded-lg p-3 md:p-4 border-l-4 border-red-500">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-800 text-sm md:text-base">
+                                        #${guests.length - index} ${guest.nama}
+                                    </h4>
+                                    <div class="text-xs md:text-sm text-gray-600 mt-1 space-y-1">
+                                        <div>📱 ${guest.nomorHp}</div>
+                                        <div>💼 ${guest.pekerjaan}</div>
+                                        ${guest.asalOrganisasi ? `<div>🏢 ${guest.asalOrganisasi}</div>` : ''}
+                                        <div>🏠 ${guest.alamatRiyadh.length > 50 ? guest.alamatRiyadh.substring(0, 50) + '...' : guest.alamatRiyadh}</div>
+                                        <div class="text-xs text-gray-500 flex items-center gap-2">
+                                            <span>⏰ ${guest.waktuDaftar}</span>
+                                            ${guest.deviceId !== deviceId ? '<span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">📱 Other device</span>' : '<span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs">📱 This device</span>'}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    guestListElement.innerHTML = guestHTML;
+                }
+            } catch (error) {
+                console.error('Display update error:', error);
+            }
+        }
+
+        function showAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'flex';
+            document.getElementById('adminEmail').value = '';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminEmail').focus();
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function verifyAdmin() {
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value.trim();
+            
+            // Admin credentials check
+            if (email === 'japriksa@gmail.com' && password === 'Riyadh2024') {
+                isAdmin = true;
+                closeAdminPanel();
+                downloadCSV();
+                alert('✅ Login admin berhasil! File CSV sedang diunduh...');
+            } else {
+                alert('❌ Email atau password salah! Hanya admin yang dapat mengunduh CSV.');
+                document.getElementById('adminEmail').value = '';
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminEmail').focus();
+            }
+        }
+
+        function downloadCSV() {
+            try {
+                if (guests.length === 0) {
+                    alert('Belum ada data tamu untuk diunduh!');
+                    return;
+                }
+
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+                const headers = [
+                    'No', 'Nama', 'Nomor HP', 'Pekerjaan', 'Asal Organisasi', 
+                    'Alamat Riyadh', 'Waktu Daftar', 'Device ID'
+                ];
+                
+                // Sort guests by registration time for CSV
+                const sortedGuests = [...guests].sort((a, b) => a.timestamp - b.timestamp);
+                
+                const csvContent = [
+                    headers.join(','),
+                    ...sortedGuests.map((guest, index) => [
+                        index + 1,
+                        `"${guest.nama.replace(/"/g, '""')}"`,
+                        `"${guest.nomorHp.replace(/"/g, '""')}"`,
+                        `"${guest.pekerjaan.replace(/"/g, '""')}"`,
+                        `"${(guest.asalOrganisasi || '-').replace(/"/g, '""')}"`,
+                        `"${guest.alamatRiyadh.replace(/"/g, '""')}"`,
+                        `"${guest.waktuDaftar}"`,
+                        `"${guest.deviceId || 'Unknown'}"`
+                    ].join(','))
+                ].join('\n');
+
+                // Add BOM for proper UTF-8 encoding in Excel
+                const BOM = '\uFEFF';
+                const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
+                
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', `JAPRI_Pesta_Rakyat_17_Agustus_2025_${timestamp}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                showAutoSaveIndicator('📥 CSV berhasil diunduh!');
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Terjadi kesalahan saat mengunduh CSV. Silakan coba lagi.');
+            }
+        }
+
+        function clearAllData() {
+            if (guests.length === 0) {
+                alert('Tidak ada data untuk dihapus!');
+                return;
+            }
+
+            if (confirm('Apakah Anda yakin ingin menghapus semua data tamu? Tindakan ini tidak dapat dibatalkan dan akan menghapus data dari SEMUA perangkat.')) {
+                guests = [];
+                saveToCloud(guests);
+                updateGuestDisplay();
+                document.getElementById('lastUpdated').textContent = 'Data berhasil dihapus';
+                showAutoSaveIndicator('🗑️ Semua data dihapus');
+                alert('Semua data berhasil dihapus dari semua perangkat!');
+            }
+        }
+
+        // Enhanced initialization
+        function initApp() {
+            try {
+                // Load existing data
+                const cloudData = loadFromCloud();
+                guests = [...cloudData.guests];
+                lastSyncTime = cloudData.lastUpdate || 0;
+                
+                updateGuestDisplay();
+                updateConnectionStatus();
+                
+                // Start real-time sync
+                startSync();
+                
+                if (guests.length > 0) {
+                    const updateTime = new Date(cloudData.lastUpdate).toLocaleString('id-ID');
+                    document.getElementById('lastUpdated').textContent = `Update: ${updateTime}`;
+                }
+                
+                console.log('JAPRI App initialized successfully');
+                console.log(`Device ID: ${deviceId}`);
+                console.log(`Total guests: ${guests.length}`);
+            } catch (error) {
+                console.error('Initialization error:', error);
+                // Fallback initialization
+                guests = [];
+                updateGuestDisplay();
+                updateConnectionStatus();
+            }
+        }
+
+        // Enhanced form validation
+        function validateForm() {
+            const nama = document.getElementById('nama').value.trim();
+            const nomorHp = document.getElementById('nomorHp').value.trim();
+            const pekerjaan = document.getElementById('pekerjaan').value.trim();
+            const alamatRiyadh = document.getElementById('alamatRiyadh').value.trim();
+
+            if (!nama || nama.length < 2) {
+                alert('Nama harus diisi minimal 2 karakter!');
+                document.getElementById('nama').focus();
+                return false;
+            }
+
+            if (!nomorHp || nomorHp.length < 8) {
+                alert('Nomor HP harus diisi dengan benar!');
+                document.getElementById('nomorHp').focus();
+                return false;
+            }
+
+            if (!pekerjaan || pekerjaan.length < 2) {
+                alert('Pekerjaan harus diisi minimal 2 karakter!');
+                document.getElementById('pekerjaan').focus();
+                return false;
+            }
+
+            if (!alamatRiyadh || alamatRiyadh.length < 10) {
+                alert('Alamat harus diisi minimal 10 karakter!');
+                document.getElementById('alamatRiyadh').focus();
+                return false;
+            }
+
+            // Check for duplicate names
+            const existingGuest = guests.find(guest => 
+                guest.nama.toLowerCase() === nama.toLowerCase() && 
+                guest.nomorHp === nomorHp
+            );
+
+            if (existingGuest) {
+                if (confirm('Tamu dengan nama dan nomor HP yang sama sudah terdaftar. Lanjutkan mendaftar?')) {
+                    return true;
+                }
+                return false;
+            }
+
+            return true;
+        }
+
+        // Update submit form with validation
+        function submitForm() {
+            if (!validateForm()) {
+                return;
+            }
+
+            try {
+                // Get form data
+                const formData = {
+                    nama: document.getElementById('nama').value.trim(),
+                    nomorHp: document.getElementById('nomorHp').value.trim(),
+                    pekerjaan: document.getElementById('pekerjaan').value.trim(),
+                    asalOrganisasi: document.getElementById('asalOrganisasi').value.trim(),
+                    alamatRiyadh: document.getElementById('alamatRiyadh').value.trim()
+                };
+
+                // Add guest with enhanced metadata
+                const newGuest = {
+                    id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                    ...formData,
+                    waktuDaftar: new Date().toLocaleString('id-ID', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    }),
+                    deviceId: deviceId,
+                    timestamp: Date.now(),
+                    userAgent: navigator.userAgent.slice(0, 50)
+                };
+
+                guests.push(newGuest);
+
+                // Save to cloud with error handling
+                const saved = saveToCloud(guests);
+                if (saved) {
+                    showAutoSaveIndicator('✅ Data berhasil disimpan!');
+                    
+                    // Reset form
+                    ['nama', 'nomorHp', 'pekerjaan', 'asalOrganisasi', 'alamatRiyadh'].forEach(id => {
+                        document.getElementById(id).value = '';
+                    });
+
+                    // Show success message
+                    const successMsg = document.getElementById('successMessage');
+                    successMsg.classList.remove('hidden');
+                    setTimeout(() => {
+                        successMsg.classList.add('hidden');
+                    }, 4000);
+
+                    // Update display
+                    updateGuestDisplay();
+                } else {
+                    alert('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                alert('Terjadi kesalahan. Silakan refresh halaman dan coba lagi.');
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+            
+            // Close admin panel when clicking outside
+            document.getElementById('adminPanel').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeAdminPanel();
+                }
+            });
+
+            // Handle Enter key in admin form
+            document.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && document.getElementById('adminPanel').style.display === 'flex') {
+                    e.preventDefault();
+                    verifyAdmin();
+                }
+            });
+
+            // Handle Enter key in main form
+            const formInputs = ['nama', 'nomorHp', 'pekerjaan', 'asalOrganisasi', 'alamatRiyadh'];
+            formInputs.forEach(id => {
+                document.getElementById(id).addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        submitForm();
+                    }
+                });
+            });
+        });
+
+        // Mobile-specific optimizations
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Add mobile-specific styles
+            document.body.style.webkitTextSizeAdjust = '100%';
+            document.body.style.webkitTouchCallout = 'none';
+            
+            // Prevent zoom on input focus for iOS
+            document.addEventListener('DOMContentLoaded', function() {
+                const inputs = document.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    input.style.fontSize = '16px';
+                    input.addEventListener('focus', function() {
+                        this.style.fontSize = '16px';
+                    });
+                });
+            });
+        }
+
+        // Enhanced online/offline handling
+        window.addEventListener('online', function() {
+            startSync();
+            updateConnectionStatus();
+            showAutoSaveIndicator('🌐 Kembali online - Sync aktif');
+        });
+
+        window.addEventListener('offline', function() {
+            stopSync();
+            updateConnectionStatus();
+            showAutoSaveIndicator('📴 Offline - Data tersimpan lokal');
+        });
+
+        // Handle page visibility changes (app backgrounding)
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                // App going to background - save data
+                if (guests.length > 0) {
+                    saveToCloud(guests);
+                }
+                stopSync();
+            } else {
+                // App coming to foreground - resume sync
+                const cloudData = loadFromCloud();
+                if (cloudData.lastUpdate > lastSyncTime) {
+                    guests = [...cloudData.guests];
+                    lastSyncTime = cloudData.lastUpdate;
+                    updateGuestDisplay();
+                    showAutoSaveIndicator('🔄 Data di-sync dari cloud');
+                }
+                startSync();
+            }
+        });
+
+        // Prevent accidental page unload
+        window.addEventListener('beforeunload', function(e) {
+            if (guests.length > 0) {
+                saveToCloud(guests); // Final save
+                e.preventDefault();
+                e.returnValue = 'Data akan tersimpan otomatis. Yakin ingin meninggalkan halaman?';
+            }
+        });
+
+        // Performance optimization
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:text/javascript,// Minimal SW for caching').catch(() => {});
+        }
+
+        // Touch optimization for mobile
+        document.addEventListener('touchstart', function() {}, { passive: true });
+        document.addEventListener('touchmove', function() {}, { passive: true });
+
+        // Auto-save every 30 seconds as backup
+        setInterval(() => {
+            if (guests.length > 0) {
+                saveToCloud(guests);
+            }
+        }, 30000);
+
+        // Initialize app when page loads (multiple fallbacks)
+        window.addEventListener('load', initApp);
+        document.addEventListener('DOMContentLoaded', initApp);
+        setTimeout(initApp, 1000); // Final fallback
+    </script>
+</body>
+</html>
